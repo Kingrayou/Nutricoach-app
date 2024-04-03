@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellness Website</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background-color: lightblue;
+      padding: 10px;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+    #graph-container {
+      width: 80%;
+      margin: 50px auto;
+      text-align: center;
+    }
+    #graph {
+      border: 1px solid #ccc;
+      height: 300px;
+    }
+    #inputs {
+      margin-top: 20px;
+    }
+    #inputs label {
+      margin-right: 10px;
+    }
+    #inputs input[type="number"] {
+      width: 80px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="meals.html">Meals</a></li>
+      <li><a href="workouts.html">Workouts</a></li>
+      <li><a href="customized.html">Customize</a></li>
+    </ul>
+  </nav>
+  <div id="graph-container">
+    <h2>Nutritional Chart</h2>
+    <canvas id="graph"></canvas>
+    <div id="inputs">
+      <label for="calories">Calories:</label>
+      <input type="number" id="calories">
+      <label for="carbs">Carbs:</label>
+      <input type="number" id="carbs">
+      <label for="protein">Protein:</label>
+      <input type="number" id="protein">
+      <label for="fiber">Fiber:</label>
+      <input type="number" id="fiber">
+    </div>
+  </div>
+
+  <script>
+    // Get references to input elements
+    const caloriesInput = document.getElementById('calories');
+    const carbsInput = document.getElementById('carbs');
+    const proteinInput = document.getElementById('protein');
+    const fiberInput = document.getElementById('fiber');
+
+    // Get reference to canvas element
+    const ctx = document.getElementById('graph').getContext('2d');
+
+    // Create Chart instance
+    const chart = new Chart(ctx, {
+      type: 'pie', // Change from 'bar' to 'pie'
+      data: {
+        labels: ['Calories', 'Carbs', 'Protein', 'Fiber'],
+        datasets: [{
+          label: 'Nutritional Values',
+          data: [0, 0, 0, 0],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Nutritional Values in Pie Chart'
+          }
+        }
+      }
+    });
+
+    // Update chart data when input values change
+    caloriesInput.addEventListener('input', updateChartData);
+    carbsInput.addEventListener('input', updateChartData);
+    proteinInput.addEventListener('input', updateChartData);
+    fiberInput.addEventListener('input', updateChartData);
+
+    function updateChartData() {
+      chart.data.datasets[0].data = [
+        caloriesInput.value,
+        carbsInput.value,
+        proteinInput.value,
+        fiberInput.value
+      ];
+      chart.update();
+    }
+  </script>
+</body>
+</html>

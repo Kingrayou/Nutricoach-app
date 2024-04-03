@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customize</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background-color: lightblue;
+      padding: 10px;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+    .content-container {
+      width: 80%;
+      margin: 50px auto;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+    }
+    .save-button {
+      padding: 10px 20px;
+      background-color: lightblue;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="meals.html">Meals</a></li>
+      <li><a href="workouts.html">Workouts</a></li>
+      <li><a href="#">Customize</a></li>
+    </ul>
+  </nav>
+  <div class="content-container">
+    <h2>Edit Meals Page Content:</h2>
+    <textarea id="meals-content"></textarea>
+    <button class="save-button" onclick="saveMealsContent()">Save Meals Content</button>
+
+    <h2>Edit Workouts Page Content:</h2>
+    <textarea id="workouts-content"></textarea>
+    <button class="save-button" onclick="saveWorkoutsContent()">Save Workouts Content</button>
+  </div>
+
+  <script>
+    // Load default content for meals and workouts pages
+    window.onload = function() {
+      document.getElementById('meals-content').value = `<!-- Paste your customized HTML content for the meals page here -->`;
+      document.getElementById('workouts-content').value = `<!-- Paste your customized HTML content for the workouts page here -->`;
+    }
+
+    // Function to save customized content for meals page
+    function saveMealsContent() {
+      var mealsContent = document.getElementById('meals-content').value;
+      localStorage.setItem('mealsContent', mealsContent);
+      alert('Meals content saved successfully!');
+    }
+
+    // Function to save customized content for workouts page
+    function saveWorkoutsContent() {
+      var workoutsContent = document.getElementById('workouts-content').value;
+      localStorage.setItem('workoutsContent', workoutsContent);
+      alert('Workouts content saved successfully!');
+    }
+  </script>
+</body>
+</html>
